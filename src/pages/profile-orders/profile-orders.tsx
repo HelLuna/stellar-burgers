@@ -2,11 +2,10 @@ import { selectUserOrders } from '@selectors';
 import { fetchUserOrders } from '@slices';
 import { ProfileOrdersUI } from '@ui-pages';
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch, useSelector } from '../../services/store';
 
 export const ProfileOrders: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
   const orders = useSelector(selectUserOrders);
 
   useEffect(() => {

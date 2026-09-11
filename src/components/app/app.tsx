@@ -21,20 +21,14 @@ import {
   useNavigate
 } from 'react-router-dom';
 import { ProtectedRoute } from '../protected-route';
-import { useDispatch } from 'react-redux';
-import { AppDispatch } from 'src/services/store';
+import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { fetchIngredients } from '@slices';
 
 const App = () => {
-  /** TODO: взять переменные из стора */
-  const isIngredientsLoading = false;
-  const ingredients = [];
-  const error = null;
-
   const location = useLocation();
   const navigate = useNavigate();
-  const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch();
 
   const backgroundLocation = location.state?.background;
 
@@ -73,9 +67,7 @@ const App = () => {
           path='/ingredients/:id'
           element={
             <div className={styles.detailPageWrap}>
-              <p
-                className={`text  text_type_main-large ${styles.detailHeader}`}
-              >
+              <p className={`text text_type_main-large ${styles.detailHeader}`}>
                 Детали ингредиента
               </p>
               <IngredientDetails />

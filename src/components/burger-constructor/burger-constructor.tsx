@@ -6,19 +6,28 @@ import { AppDispatch } from 'src/services/store';
 import {
   selectConstructorItems,
   selectOrderModalData,
-  selectOrderRequest
+  selectOrderRequest,
+  selectUser
 } from '@selectors';
 import { clearBurger, clearOrderModalData, createOrder } from '@slices';
+import { useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate();
 
   const constructorItems = useSelector(selectConstructorItems);
   const orderRequest = useSelector(selectOrderRequest);
   const orderModalData = useSelector(selectOrderModalData);
+  const user = useSelector(selectUser);
 
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+
     dispatch(
       createOrder([
         constructorItems.bun._id,
@@ -27,6 +36,7 @@ export const BurgerConstructor: FC = () => {
       ])
     );
   };
+
   const closeOrderModal = () => {
     dispatch(clearOrderModalData());
     dispatch(clearBurger());

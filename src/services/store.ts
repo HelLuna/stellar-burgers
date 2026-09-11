@@ -4,7 +4,8 @@ import {
   feedReducer,
   ingredientsReducer,
   orderReducer,
-  userOrdersReducer
+  userOrdersReducer,
+  userReducer
 } from '@slices';
 
 import {
@@ -18,8 +19,8 @@ const rootReducer = combineReducers({
   burger: burgerReducer,
   feed: feedReducer,
   order: orderReducer,
-  userOrders: userOrdersReducer
-  // user: userReducer,
+  userOrders: userOrdersReducer,
+  user: userReducer
 });
 
 const store = configureStore({

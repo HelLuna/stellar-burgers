@@ -7,6 +7,7 @@ import { BurgerConstructor } from '../../components';
 import { Preloader } from '../../components/ui';
 import { FC } from 'react';
 import { selectIngredientsError, selectIngredientsIsLoading } from '@selectors';
+import clsx from 'clsx';
 
 export const ConstructorPage: FC = () => {
   const isLoading = useSelector(selectIngredientsIsLoading);
@@ -18,7 +19,7 @@ export const ConstructorPage: FC = () => {
 
   if (error) {
     return (
-      <p className={`text text_type_main-medium mt-10 ${styles.title}`}>
+      <p className={clsx('text text_type_main-medium mt-10', styles.title)}>
         {error}
       </p>
     );
@@ -27,11 +28,14 @@ export const ConstructorPage: FC = () => {
   return (
     <main className={styles.containerMain}>
       <h1
-        className={`${styles.title} text text_type_main-large mt-10 mb-5 pl-5`}
+        className={clsx(
+          styles.title,
+          'text text_type_main-large mt-10 mb-5 pl-5'
+        )}
       >
         Соберите бургер
       </h1>
-      <div className={`${styles.main} pl-5 pr-5`}>
+      <div className={clsx(styles.main, 'pl-5 pr-5')}>
         <BurgerIngredients />
         <BurgerConstructor />
       </div>

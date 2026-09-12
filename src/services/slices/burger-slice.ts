@@ -1,5 +1,6 @@
 import { createSlice, nanoid, PayloadAction } from '@reduxjs/toolkit';
 import { TConstructorIngredient, TIngredient } from '@utils-types';
+import { createOrder } from './order-slice';
 
 export type TBurgerState = {
   bun: TConstructorIngredient | null;
@@ -43,8 +44,10 @@ const burgerSlice = createSlice({
       if (index >= state.ingredients.length - 1) return;
       const [item] = state.ingredients.splice(index, 1);
       state.ingredients.splice(index + 1, 0, item);
-    },
-    clearBurger: () => initialState
+    }
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createOrder.fulfilled, () => initialState);
   }
 });
 
@@ -53,6 +56,5 @@ export const {
   addIngredient,
   removeIngredient,
   moveIngredientUp,
-  moveIngredientDown,
-  clearBurger
+  moveIngredientDown
 } = burgerSlice.actions;

@@ -5,11 +5,12 @@ import { FeedInfoUI } from '../ui/feed-info';
 import { useSelector } from '../../services/store';
 import { selectFeed, selectFeedOrders } from '@selectors';
 
+const maxOrders = 20;
 const getOrders = (orders: TOrder[], status: string): number[] =>
   orders
     .filter((item) => item.status === status)
     .map((item) => item.number)
-    .slice(0, 20);
+    .slice(0, maxOrders);
 
 export const FeedInfo: FC = () => {
   const orders = useSelector(selectFeedOrders);

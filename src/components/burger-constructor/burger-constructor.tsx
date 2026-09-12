@@ -8,12 +8,13 @@ import {
   selectOrderRequest,
   selectUser
 } from '@selectors';
-import { clearBurger, clearOrderModalData, createOrder } from '@slices';
-import { useNavigate } from 'react-router-dom';
+import { clearOrderModalData, createOrder } from '@slices';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 export const BurgerConstructor: FC = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const location = useLocation();
 
   const constructorItems = useSelector(selectConstructorItems);
   const orderRequest = useSelector(selectOrderRequest);
@@ -23,7 +24,7 @@ export const BurgerConstructor: FC = () => {
   const onOrderClick = () => {
     if (!constructorItems.bun || orderRequest) return;
     if (!user) {
-      navigate('/login');
+      navigate('/login', { state: { from: location } });
       return;
     }
 
@@ -38,7 +39,6 @@ export const BurgerConstructor: FC = () => {
 
   const closeOrderModal = () => {
     dispatch(clearOrderModalData());
-    dispatch(clearBurger());
   };
 
   const price = useMemo(

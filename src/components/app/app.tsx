@@ -24,6 +24,7 @@ import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { checkUserAuth, fetchIngredients } from '@slices';
+import clsx from 'clsx';
 
 const App = () => {
   const location = useLocation();
@@ -56,7 +57,10 @@ const App = () => {
           element={
             <div className={styles.detailPageWrap}>
               <p
-                className={`text text_type_digits-default ${styles.detailHeader}`}
+                className={clsx(
+                  'text text_type_digits-default',
+                  styles.detailHeader
+                )}
               >
                 #{orderNumber}
               </p>
@@ -68,7 +72,12 @@ const App = () => {
           path='/ingredients/:id'
           element={
             <div className={styles.detailPageWrap}>
-              <p className={`text text_type_main-large ${styles.detailHeader}`}>
+              <p
+                className={clsx(
+                  'text text_type_main-large',
+                  styles.detailHeader
+                )}
+              >
                 Детали ингредиента
               </p>
               <IngredientDetails />
@@ -129,7 +138,10 @@ const App = () => {
             <ProtectedRoute>
               <div className={styles.detailPageWrap}>
                 <p
-                  className={`text text_type_digits-default ${styles.detailHeader}`}
+                  className={clsx(
+                    'text text_type_digits-default',
+                    styles.detailHeader
+                  )}
                 >
                   #{orderNumber}
                 </p>

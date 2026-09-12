@@ -35,7 +35,6 @@ export const selectUserOrdersIsLoading = (state: RootState) =>
   state.userOrders.isLoading;
 
 export const selectUser = (state: RootState) => state.user.user;
-export const selectIsAuthenticated = (state: RootState) => !!state.user.user;
 export const selectIsAuthChecked = (state: RootState) =>
   state.user.isAuthChecked;
 export const selectUserError = (state: RootState) => state.user.error;

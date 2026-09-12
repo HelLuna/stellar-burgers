@@ -2,6 +2,7 @@ import {
   getUserApi,
   loginUserApi,
   logoutApi,
+  refreshToken,
   registerUserApi,
   TLoginData,
   TRegisterData,
@@ -28,8 +29,20 @@ const initialState: TUserState = {
 export const checkUserAuth = createAsyncThunk(
   'user/checkUserAuth',
   async () => {
-    if (!getCookie('accessToken')) {
+    const hasAccessToken = !!getCookie('accessToken');
+    const hasRefreshToken = !!localStorage.getItem('refreshToken');
+
+    if (!hasAccessToken && !hasRefreshToken) {
       return null;
+    }
+
+    if (!hasAccessToken) {
+      try {
+        await refreshToken();
+      } catch (err) {
+        localStorage.removeItem('refreshToken');
+        throw err;
+      }
     }
 
     const res = await getUserApi();

@@ -13,17 +13,29 @@ import { NavLink } from 'react-router-dom';
 const linkClass = ({ isActive }: { isActive: boolean }) =>
   clsx(styles.link, isActive && styles.link_active);
 
+const iconType = (isActive: boolean) => (isActive ? 'primary' : 'secondary');
+
 export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
   <header className={styles.header}>
     <nav className={clsx(styles.menu, 'p-4')}>
       <div className={styles.menu_part_left}>
         <NavLink to='/' className={linkClass}>
-          <BurgerIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2 mr-10'>Конструктор</p>
+          {({ isActive }) => (
+            <>
+              <BurgerIcon type={iconType(isActive)} />
+              <p className='text text_type_main-default ml-2 mr-10'>
+                Конструктор
+              </p>
+            </>
+          )}
         </NavLink>
         <NavLink to='/feed' className={linkClass}>
-          <ListIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2'>Лента заказов</p>
+          {({ isActive }) => (
+            <>
+              <ListIcon type={iconType(isActive)} />
+              <p className='text text_type_main-default ml-2'>Лента заказов</p>
+            </>
+          )}
         </NavLink>
       </div>
       <div className={styles.logo}>
@@ -31,10 +43,14 @@ export const AppHeaderUI: FC<TAppHeaderUIProps> = ({ userName }) => (
       </div>
       <div className={styles.link_position_last}>
         <NavLink to='/profile' className={linkClass}>
-          <ProfileIcon type={'primary'} />
-          <p className='text text_type_main-default ml-2'>
-            {userName || 'Личный кабинет'}
-          </p>
+          {({ isActive }) => (
+            <>
+              <ProfileIcon type={iconType(isActive)} />
+              <p className='text text_type_main-default ml-2'>
+                {userName || 'Личный кабинет'}
+              </p>
+            </>
+          )}
         </NavLink>
       </div>
     </nav>

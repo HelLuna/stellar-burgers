@@ -12,7 +12,13 @@ import {
 import '../../index.css';
 import styles from './app.module.css';
 
-import { AppHeader, OrderInfo, Modal, IngredientDetails } from '@components';
+import {
+  AppHeader,
+  DetailPage,
+  IngredientDetails,
+  Modal,
+  OrderInfo
+} from '@components';
 import {
   Route,
   Routes,
@@ -24,7 +30,6 @@ import { ProtectedRoute } from '../protected-route';
 import { useDispatch } from '../../services/store';
 import { useEffect } from 'react';
 import { checkUserAuth, fetchIngredients } from '@slices';
-import clsx from 'clsx';
 
 const App = () => {
   const location = useLocation();
@@ -55,33 +60,20 @@ const App = () => {
         <Route
           path='/feed/:number'
           element={
-            <div className={styles.detailPageWrap}>
-              <p
-                className={clsx(
-                  'text text_type_digits-default',
-                  styles.detailHeader
-                )}
-              >
-                #{orderNumber}
-              </p>
+            <DetailPage
+              title={`#${orderNumber}`}
+              titleClass='text_type_digits-default'
+            >
               <OrderInfo />
-            </div>
+            </DetailPage>
           }
         />
         <Route
           path='/ingredients/:id'
           element={
-            <div className={styles.detailPageWrap}>
-              <p
-                className={clsx(
-                  'text text_type_main-large',
-                  styles.detailHeader
-                )}
-              >
-                Детали ингредиента
-              </p>
+            <DetailPage title='Детали ингредиента'>
               <IngredientDetails />
-            </div>
+            </DetailPage>
           }
         />
         <Route
@@ -136,17 +128,12 @@ const App = () => {
           path='/profile/orders/:number'
           element={
             <ProtectedRoute>
-              <div className={styles.detailPageWrap}>
-                <p
-                  className={clsx(
-                    'text text_type_digits-default',
-                    styles.detailHeader
-                  )}
-                >
-                  #{orderNumber}
-                </p>
+              <DetailPage
+                title={`#${orderNumber}`}
+                titleClass='text_type_digits-default'
+              >
                 <OrderInfo />
-              </div>
+              </DetailPage>
             </ProtectedRoute>
           }
         />

@@ -3,6 +3,7 @@ export * from './burger-constructor';
 export * from './burger-constructor-element';
 export * from './burger-ingredient';
 export * from './burger-ingredients';
+export * from './detail-page';
 export * from './feed-info';
 export * from './ingredient-details';
 export * from './ingredients-category';

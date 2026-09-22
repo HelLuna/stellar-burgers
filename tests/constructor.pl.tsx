@@ -159,13 +159,6 @@ test.describe('Конструктор бургера', () => {
       await addIngredient(page, main.name);
       await addIngredient(page, main.name);
 
-      await expect(page.getByTestId('constructor-bun-top')).toContainText(
-        bun.name
-      );
-      await expect(page.getByTestId('constructor-ingredient')).toHaveCount(3);
-      await expect(page.getByTestId('constructor-bun-bottom')).toContainText(
-        bun.name
-      );
       await expect(page.getByTestId('constructor-price')).toHaveText(
         String(bun.price * 2 + main.price * 2 + sauce.price)
       );

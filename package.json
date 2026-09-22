@@ -94,7 +94,7 @@
     "lint:fix": "npm run lint -- --fix",
     "format": "prettier ./src --write",
     "test": "jest",
-    "test-pl": "playwright test -c playwright.config.ts"
+    "test-pl": "playwright test"
   },
   "eslintConfig": {
     "extends": [

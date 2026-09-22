@@ -1,0 +1,19 @@
+{
+  "success": true,
+  "name": "Spicy био-марсианский люминесцентный бургер",
+  "order": {
+    "_id": "66d1f0a0c3f7b9001cfa0999",
+    "status": "done",
+    "name": "Spicy био-марсианский люминесцентный бургер",
+    "owner": {
+      "name": "Тест Тест",
+      "email": "test@example.ru",
+      "createdAt": "2026-09-17T10:00:00.000Z",
+      "updatedAt": "2026-09-17T10:00:00.000Z"
+    },
+    "createdAt": "2026-09-22T10:00:00.000Z",
+    "updatedAt": "2026-09-22T10:00:00.000Z",
+    "number": 110489,
+    "price": 2490
+  }
+}

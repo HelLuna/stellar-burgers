@@ -1,9 +1,12 @@
 import { test, expect, Page, Locator } from '@playwright/test';
 import ingredientsMock from './hars/ingredients.json';
-import orderMock from './mocks/order.json';
-import userMock from './mocks/user.json';
+import orderMock from './hars/order.json';
+import userMock from './hars/user.json';
 
 const INGREDIENTS_HAR = './tests/hars/ingredients.har';
+const USER_HAR = './tests/hars/user.har';
+const ORDER_HAR = './tests/hars/order.har';
+
 const ACCESS_TOKEN = 'Bearer test-access-token';
 const REFRESH_TOKEN = 'test-refresh-token';
 
@@ -15,6 +18,20 @@ const [sauce] = ingredients.filter((item) => item.type === 'sauce');
 const mockIngredients = async (page: Page) => {
   await page.routeFromHAR(INGREDIENTS_HAR, {
     url: '**/api/ingredients',
+    update: false
+  });
+};
+
+const mockUser = async (page: Page) => {
+  await page.routeFromHAR(USER_HAR, {
+    url: '**/api/auth/user',
+    update: false
+  });
+};
+
+const mockOrder = async (page: Page) => {
+  await page.routeFromHAR(ORDER_HAR, {
+    url: '**/api/orders',
     update: false
   });
 };
@@ -244,13 +261,8 @@ test.describe('Создание заказа', () => {
     }, REFRESH_TOKEN);
 
     await mockIngredients(page);
-
-    await page.route('**/api/auth/user', (route) =>
-      route.fulfill({ json: userMock })
-    );
-    await page.route('**/api/orders', (route) =>
-      route.fulfill({ json: orderMock })
-    );
+    await mockUser(page);
+    await mockOrder(page);
 
     await page.goto('/');
   });
